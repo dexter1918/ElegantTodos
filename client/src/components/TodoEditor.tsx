@@ -178,7 +178,7 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
               </Button>
               <Button
                 type="submit"
-                className="px-4 py-2 bg-primary text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                className="px-4 py-2 bg-primary text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
                 Save Changes
               </Button>
