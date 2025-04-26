@@ -23,7 +23,7 @@ export function TodoList({
   const activeTodos = todos.filter((todo) => !todo.completed);
   const completedTodos = todos.filter((todo) => todo.completed);
 
-  const handleDragEnd = (result: DropResult) => {
+  const handleDragEnd = (result: any) => {
     const { source, destination } = result;
 
     // Dropped outside a droppable area
@@ -95,7 +95,7 @@ export function TodoList({
         </h2>
 
         <Droppable droppableId="completed-todos">
-          {(provided: DroppableProvided) => (
+          {(provided) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
