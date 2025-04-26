@@ -30,7 +30,7 @@ export function AddTodoForm({ onAddTodo }: AddTodoFormProps) {
       />
       <Button
         type="submit"
-        className="px-6 py-3 bg-primary text-white rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+        className="px-6 py-3 bg-primary text-white rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
       >
         Add Task
       </Button>
