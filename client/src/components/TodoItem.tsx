@@ -52,17 +52,18 @@ export function TodoItem({ todo, index, onToggleComplete, onEdit, onDelete }: To
             ref={provided.innerRef}
             {...provided.draggableProps}
             className={cn(
-              "todo-item bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 flex items-center gap-3 border border-gray-200 dark:border-gray-700",
+              "todo-item bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 flex items-center gap-3 border border-gray-200 dark:border-gray-700 transition-all",
               todo.completed && "completed-item bg-gray-50 dark:bg-gray-900",
               todo.priority && "bg-red-50 dark:bg-red-900/30 border-red-100 dark:border-red-800",
-              snapshot.isDragging && "opacity-50 bg-gray-50 dark:bg-gray-900"
+              snapshot.isDragging && "opacity-80 shadow-md scale-[1.02] z-10"
             )}
           >
             <div
               {...provided.dragHandleProps}
-              className="drag-handle text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+              className="drag-handle flex items-center justify-center w-6 h-6 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors rounded cursor-grab active:cursor-grabbing"
+              title="Drag to reorder"
             >
-              <GripVertical size={18} />
+              <GripVertical size={16} />
             </div>
             
             <Checkbox
