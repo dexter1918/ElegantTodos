@@ -95,3 +95,9 @@
   transform: translateY(20px);
   transition: opacity 300ms, transform 300ms;
 }
+
+/* Override default dialog styling */
+.floating-editor {
+  border-radius: 0.5rem !important;
+  overflow: hidden;
+}
