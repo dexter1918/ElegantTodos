@@ -1,6 +1,6 @@
 import { Todo } from "@/lib/utils";
 import { TodoItem } from "./TodoItem";
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, DroppableProvided, DropResult } from "react-beautiful-dnd";
 import { CircleCheck, CheckIcon } from "lucide-react";
 
 interface TodoListProps {

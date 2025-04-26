@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Todo } from "@/lib/utils";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable, DraggableProvided, DraggableStateSnapshot } from "react-beautiful-dnd";
 import { Checkbox } from "@/components/ui/checkbox";
 import { GripVertical, Pencil, Trash2 } from "lucide-react";
 
@@ -15,7 +15,7 @@ interface TodoItemProps {
 export function TodoItem({ todo, index, onToggleComplete, onEdit, onDelete }: TodoItemProps) {
   return (
     <Draggable draggableId={todo.id} index={index}>
-      {(provided, snapshot) => (
+      {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
@@ -28,7 +28,7 @@ export function TodoItem({ todo, index, onToggleComplete, onEdit, onDelete }: To
         >
           <div
             {...provided.dragHandleProps}
-            className="drag-handle text-gray-400 hover:text-gray-600 transition-colors"
+            className="drag-handle text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
           >
             <GripVertical size={18} />
           </div>
@@ -45,15 +45,15 @@ export function TodoItem({ todo, index, onToggleComplete, onEdit, onDelete }: To
           
           <span
             className={cn(
-              "todo-text flex-grow",
-              todo.completed && "text-gray-500"
+              "todo-text flex-grow dark:text-gray-200",
+              todo.completed && "text-gray-500 dark:text-gray-500"
             )}
           >
             {todo.text}
           </span>
           
           <button
-            className="edit-todo-btn text-gray-500 hover:text-primary transition-colors"
+            className="edit-todo-btn text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
             onClick={() => onEdit(todo)}
             aria-label="Edit todo"
           >
@@ -61,7 +61,7 @@ export function TodoItem({ todo, index, onToggleComplete, onEdit, onDelete }: To
           </button>
           
           <button
-            className="delete-todo-btn text-gray-500 hover:text-red-500 transition-colors"
+            className="delete-todo-btn text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors"
             onClick={() => onDelete(todo.id)}
             aria-label="Delete todo"
           >
