@@ -66,7 +66,7 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="floating-editor bg-white shadow-lg w-full max-w-lg p-6 sm:max-w-md max-h-[90vh] overflow-y-auto" style={{ borderRadius: '0.5rem' }}>
+      <DialogContent className="floating-editor bg-white shadow-lg w-full max-w-lg p-6 sm:max-w-md" style={{ borderRadius: '0.5rem' }}>
         <DialogHeader className="mb-4">
           <DialogTitle className="text-lg font-semibold text-gray-800">Edit Task</DialogTitle>
         </DialogHeader>
