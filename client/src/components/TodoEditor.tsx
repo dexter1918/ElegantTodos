@@ -66,9 +66,9 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="floating-editor bg-white shadow-lg w-full max-w-lg p-6 sm:max-w-md" style={{ borderRadius: '0.5rem' }}>
+      <DialogContent className="floating-editor bg-white dark:bg-gray-800 shadow-lg w-full max-w-lg p-6 sm:max-w-md" style={{ borderRadius: '0.5rem' }}>
         <DialogHeader className="mb-4">
-          <DialogTitle className="text-lg font-semibold text-gray-800">Edit Task</DialogTitle>
+          <DialogTitle className="text-lg font-semibold text-gray-800 dark:text-gray-100">Edit Task</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -78,11 +78,11 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
               name="text"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-700">Task Description</FormLabel>
+                  <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">Task Description</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
                   </FormControl>
                 </FormItem>
@@ -94,12 +94,12 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
               name="notes"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-700">Notes</FormLabel>
+                  <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">Notes</FormLabel>
                   <FormControl>
                     <Textarea
                       {...field}
                       rows={4}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
                   </FormControl>
                 </FormItem>
@@ -107,7 +107,7 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
             />
 
             <div className="space-y-3">
-              <h3 className="text-sm font-medium text-gray-700">Additional Options</h3>
+              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">Additional Options</h3>
 
               <FormField
                 control={form.control}
@@ -118,10 +118,10 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
                       <Checkbox
                         checked={field.value}
                         onCheckedChange={field.onChange}
-                        className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                        className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-primary focus:ring-primary"
                       />
                     </FormControl>
-                    <FormLabel className="text-sm text-gray-700">Mark as high priority</FormLabel>
+                    <FormLabel className="text-sm text-gray-700 dark:text-gray-300">Mark as high priority</FormLabel>
                   </FormItem>
                 )}
               />
@@ -131,12 +131,12 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
                 name="dueDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-gray-700">Due Date</FormLabel>
+                    <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">Due Date</FormLabel>
                     <FormControl>
                       <Input
                         type="date"
                         {...field}
-                        className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                       />
                     </FormControl>
                   </FormItem>
@@ -148,18 +148,18 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
                 name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-gray-700">Category</FormLabel>
+                    <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">Category</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <SelectTrigger className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                           <SelectValue placeholder="Select category" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value="work">Work</SelectItem>
-                        <SelectItem value="personal">Personal</SelectItem>
-                        <SelectItem value="errands">Errands</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
+                      <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
+                        <SelectItem value="work" className="dark:text-gray-200">Work</SelectItem>
+                        <SelectItem value="personal" className="dark:text-gray-200">Personal</SelectItem>
+                        <SelectItem value="errands" className="dark:text-gray-200">Errands</SelectItem>
+                        <SelectItem value="other" className="dark:text-gray-200">Other</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormItem>
@@ -172,7 +172,7 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
                 type="button"
                 variant="outline"
                 onClick={onClose}
-                className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
                 Cancel
               </Button>
