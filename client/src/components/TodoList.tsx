@@ -53,7 +53,7 @@ export function TodoList({
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div id="todo-container" className="mb-8">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+        <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100 flex items-center">
           <CircleCheck className="mr-2 text-primary" />
           Active Tasks
         </h2>
@@ -77,9 +77,9 @@ export function TodoList({
                   />
                 ))
               ) : (
-                <div className="bg-gray-50 rounded-lg p-8 text-center border border-dashed border-gray-300">
-                  <CheckIcon className="h-10 w-10 text-gray-400 mx-auto mb-3" />
-                  <p className="text-gray-500">No active tasks. Add a new task to get started!</p>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 text-center border border-dashed border-gray-300 dark:border-gray-700">
+                  <CheckIcon className="h-10 w-10 text-gray-400 dark:text-gray-500 mx-auto mb-3" />
+                  <p className="text-gray-500 dark:text-gray-400">No active tasks. Add a new task to get started!</p>
                 </div>
               )}
               {provided.placeholder}
@@ -89,7 +89,7 @@ export function TodoList({
       </div>
 
       <div id="completed-container">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+        <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100 flex items-center">
           <CheckIcon className="mr-2 text-green-500" />
           Completed Tasks
         </h2>
@@ -113,9 +113,9 @@ export function TodoList({
                   />
                 ))
               ) : (
-                <div className="bg-gray-50 rounded-lg p-8 text-center border border-dashed border-gray-300">
-                  <CircleCheck className="h-10 w-10 text-gray-400 mx-auto mb-3" />
-                  <p className="text-gray-500">No completed tasks yet. Start by checking off a task!</p>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 text-center border border-dashed border-gray-300 dark:border-gray-700">
+                  <CircleCheck className="h-10 w-10 text-gray-400 dark:text-gray-500 mx-auto mb-3" />
+                  <p className="text-gray-500 dark:text-gray-400">No completed tasks yet. Start by checking off a task!</p>
                 </div>
               )}
               {provided.placeholder}
