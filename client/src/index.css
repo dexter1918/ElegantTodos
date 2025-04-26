@@ -8,7 +8,11 @@
   }
 
   body {
-    @apply font-sans antialiased bg-gray-50 text-gray-800;
+    @apply font-sans antialiased bg-gray-50 text-gray-800 transition-colors duration-200;
+  }
+  
+  .dark body {
+    @apply bg-gray-900 text-gray-200;
   }
 
   :root {

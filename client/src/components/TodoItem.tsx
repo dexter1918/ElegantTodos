@@ -20,10 +20,10 @@ export function TodoItem({ todo, index, onToggleComplete, onEdit, onDelete }: To
           ref={provided.innerRef}
           {...provided.draggableProps}
           className={cn(
-            "todo-item bg-white rounded-lg shadow-sm p-4 flex items-center gap-3 border border-gray-200",
-            todo.completed && "completed-item bg-gray-50",
-            todo.priority && "bg-red-50 border-red-100",
-            snapshot.isDragging && "opacity-50 bg-gray-50"
+            "todo-item bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 flex items-center gap-3 border border-gray-200 dark:border-gray-700",
+            todo.completed && "completed-item bg-gray-50 dark:bg-gray-900",
+            todo.priority && "bg-red-50 dark:bg-red-900/30 border-red-100 dark:border-red-800",
+            snapshot.isDragging && "opacity-50 bg-gray-50 dark:bg-gray-900"
           )}
         >
           <div
