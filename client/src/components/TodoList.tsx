@@ -1,6 +1,6 @@
 import { Todo } from "@/lib/utils";
 import { TodoItem } from "./TodoItem";
-import { DragDropContext, Droppable, DroppableProvided, DropResult } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { CircleCheck, CheckIcon } from "lucide-react";
 
 interface TodoListProps {
@@ -95,7 +95,7 @@ export function TodoList({
         </h2>
 
         <Droppable droppableId="completed-todos">
-          {(provided) => (
+          {(provided: DroppableProvided) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}

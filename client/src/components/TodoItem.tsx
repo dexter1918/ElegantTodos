@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Todo } from "@/lib/utils";
-import { Draggable, DraggableProvided, DraggableStateSnapshot } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 import { Checkbox } from "@/components/ui/checkbox";
 import { GripVertical, Pencil, Trash2 } from "lucide-react";
 
@@ -15,7 +15,7 @@ interface TodoItemProps {
 export function TodoItem({ todo, index, onToggleComplete, onEdit, onDelete }: TodoItemProps) {
   return (
     <Draggable draggableId={todo.id} index={index}>
-      {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
+      {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
