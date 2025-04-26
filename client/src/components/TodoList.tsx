@@ -96,7 +96,11 @@ export function TodoList({
               ) : (
                 <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 text-center border border-dashed border-gray-300 dark:border-gray-700">
                   <CheckIcon className="h-10 w-10 text-gray-400 dark:text-gray-500 mx-auto mb-3" />
-                  <p className="text-gray-500 dark:text-gray-400">No active tasks. Add a new task to get started!</p>
+                  {isSearching ? (
+                    <p className="text-gray-500 dark:text-gray-400">No matching active tasks found for "{searchTerm}"</p>
+                  ) : (
+                    <p className="text-gray-500 dark:text-gray-400">No active tasks. Add a new task to get started!</p>
+                  )}
                 </div>
               )}
               {provided.placeholder}
@@ -108,7 +112,7 @@ export function TodoList({
       <div id="completed-container">
         <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100 flex items-center">
           <CheckIcon className="mr-2 text-green-500" />
-          Completed Tasks
+          {isSearching ? 'Matching Completed Tasks' : 'Completed Tasks'}
         </h2>
 
         <Droppable droppableId="completed-todos">
@@ -132,7 +136,11 @@ export function TodoList({
               ) : (
                 <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 text-center border border-dashed border-gray-300 dark:border-gray-700">
                   <CircleCheck className="h-10 w-10 text-gray-400 dark:text-gray-500 mx-auto mb-3" />
-                  <p className="text-gray-500 dark:text-gray-400">No completed tasks yet. Start by checking off a task!</p>
+                  {isSearching ? (
+                    <p className="text-gray-500 dark:text-gray-400">No matching completed tasks found for "{searchTerm}"</p>
+                  ) : (
+                    <p className="text-gray-500 dark:text-gray-400">No completed tasks yet. Start by checking off a task!</p>
+                  )}
                 </div>
               )}
               {provided.placeholder}
