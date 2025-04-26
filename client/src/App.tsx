@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ReminderNotifications } from "@/components/ReminderNotifications";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <ThemeToggle />
           </div>
           <Router />
+          <ReminderNotifications />
           <Toaster />
         </div>
       </ThemeProvider>
