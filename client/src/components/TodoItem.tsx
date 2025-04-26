@@ -1,9 +1,23 @@
 import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { Todo } from "@/lib/utils";
+import { 
+  cn, 
+  Todo, 
+  formatDate, 
+  isOverdue, 
+  isDueSoon,
+  getDaysUntilDue
+} from "@/lib/utils";
 import { Draggable } from "react-beautiful-dnd";
 import { Checkbox } from "@/components/ui/checkbox";
-import { GripVertical, Pencil, Trash2 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { 
+  GripVertical, 
+  Pencil, 
+  Trash2, 
+  Calendar, 
+  Bell, 
+  Clock 
+} from "lucide-react";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 
 interface TodoItemProps {
@@ -61,14 +75,50 @@ export function TodoItem({ todo, index, onToggleComplete, onEdit, onDelete }: To
               )}
             />
             
-            <span
-              className={cn(
-                "todo-text flex-grow dark:text-gray-200",
-                todo.completed && "text-gray-500 dark:text-gray-500"
-              )}
-            >
-              {todo.text}
-            </span>
+            <div className="flex flex-col flex-grow">
+              <span
+                className={cn(
+                  "todo-text dark:text-gray-200",
+                  todo.completed && "text-gray-500 dark:text-gray-500"
+                )}
+              >
+                {todo.text}
+              </span>
+              
+              {/* Due date and reminder badges */}
+              <div className="flex gap-2 mt-1">
+                {todo.dueDate && (
+                  <Badge 
+                    variant="outline" 
+                    className={cn(
+                      "text-xs flex gap-1 items-center",
+                      isOverdue(todo.dueDate) && !todo.completed && "bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400 border-red-200 dark:border-red-800",
+                      isDueSoon(todo.dueDate) && !todo.completed && !isOverdue(todo.dueDate) && "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border-amber-200 dark:border-amber-800",
+                      todo.completed && "bg-gray-50 text-gray-500 dark:bg-gray-800 dark:text-gray-400 border-gray-200 dark:border-gray-700"
+                    )}
+                  >
+                    <Calendar size={12} />
+                    <span>
+                      {isOverdue(todo.dueDate) && !todo.completed 
+                        ? "Overdue" 
+                        : isDueSoon(todo.dueDate) && !todo.completed
+                          ? `Due ${getDaysUntilDue(todo.dueDate) === 0 ? "today" : "soon"}`
+                          : formatDate(todo.dueDate)}
+                    </span>
+                  </Badge>
+                )}
+                
+                {todo.reminderEnabled && todo.reminderDate && (
+                  <Badge 
+                    variant="outline" 
+                    className="text-xs flex gap-1 items-center bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-blue-200 dark:border-blue-800"
+                  >
+                    <Bell size={12} />
+                    <span>Reminder</span>
+                  </Badge>
+                )}
+              </div>
+            </div>
             
             <button
               className="edit-todo-btn text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
