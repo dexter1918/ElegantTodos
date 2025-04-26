@@ -19,6 +19,8 @@ const todoSchema = z.object({
   notes: z.string().optional(),
   priority: z.boolean().optional(),
   dueDate: z.string().optional(),
+  reminderEnabled: z.boolean().optional(),
+  reminderDate: z.string().optional(),
   category: z.enum(["work", "personal", "errands", "other"]).optional(),
 });
 
@@ -41,6 +43,8 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
       notes: "",
       priority: false,
       dueDate: "",
+      reminderEnabled: false,
+      reminderDate: "",
       category: "work",
     },
   });
@@ -54,6 +58,8 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
         notes: todo.notes || "",
         priority: todo.priority || false,
         dueDate: todo.dueDate || "",
+        reminderEnabled: todo.reminderEnabled || false,
+        reminderDate: todo.reminderDate || "",
         category: todo.category || "work",
       });
     }
@@ -142,6 +148,42 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
                   </FormItem>
                 )}
               />
+              
+              <FormField
+                control={form.control}
+                name="reminderEnabled"
+                render={({ field }) => (
+                  <FormItem className="flex items-center gap-2">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-primary focus:ring-primary"
+                      />
+                    </FormControl>
+                    <FormLabel className="text-sm text-gray-700 dark:text-gray-300">Enable reminder</FormLabel>
+                  </FormItem>
+                )}
+              />
+              
+              {form.watch("reminderEnabled") && (
+                <FormField
+                  control={form.control}
+                  name="reminderDate"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">Reminder Date & Time</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="datetime-local"
+                          {...field}
+                          className="px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              )}
 
               <FormField
                 control={form.control}
