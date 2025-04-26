@@ -59,7 +59,7 @@ export function TodoList({
         </h2>
 
         <Droppable droppableId="active-todos">
-          {(provided) => (
+          {(provided: any) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
