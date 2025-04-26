@@ -1,18 +1,35 @@
 import { create } from "zustand";
-import { Todo, saveTodos, loadTodos, generateId, reorderTodos } from "@/lib/utils";
+import { Todo, saveTodos, loadTodos, generateId, reorderTodos, fuzzySearchTodos } from "@/lib/utils";
 
 interface TodoState {
   todos: Todo[];
+  searchTerm: string;
+  filteredTodos: Todo[];
   addTodo: (text: string) => void;
   updateTodo: (todo: Todo) => void;
   deleteTodo: (id: string) => void;
   toggleCompleted: (id: string) => void;
   reorderActive: (startIndex: number, endIndex: number) => void;
   reorderCompleted: (startIndex: number, endIndex: number) => void;
+  setSearchTerm: (term: string) => void;
 }
 
-export const useTodoStore = create<TodoState>((set) => ({
+export const useTodoStore = create<TodoState>((set, get) => ({
   todos: loadTodos(),
+  searchTerm: "",
+  filteredTodos: loadTodos(),
+  
+  setSearchTerm: (term) =>
+    set((state) => {
+      const filtered = term.trim() === "" 
+        ? state.todos 
+        : fuzzySearchTodos(state.todos, term);
+      
+      return { 
+        searchTerm: term,
+        filteredTodos: filtered
+      };
+    }),
   
   addTodo: (text) =>
     set((state) => {
@@ -23,7 +40,16 @@ export const useTodoStore = create<TodoState>((set) => ({
       };
       const updatedTodos = [newTodo, ...state.todos];
       saveTodos(updatedTodos);
-      return { todos: updatedTodos };
+      
+      // Update filtered todos based on search term
+      const filtered = state.searchTerm.trim() === ""
+        ? updatedTodos
+        : fuzzySearchTodos(updatedTodos, state.searchTerm);
+      
+      return { 
+        todos: updatedTodos,
+        filteredTodos: filtered
+      };
     }),
     
   updateTodo: (updatedTodo) =>
@@ -32,14 +58,32 @@ export const useTodoStore = create<TodoState>((set) => ({
         todo.id === updatedTodo.id ? updatedTodo : todo
       );
       saveTodos(updatedTodos);
-      return { todos: updatedTodos };
+      
+      // Update filtered todos based on search term
+      const filtered = state.searchTerm.trim() === ""
+        ? updatedTodos
+        : fuzzySearchTodos(updatedTodos, state.searchTerm);
+      
+      return { 
+        todos: updatedTodos,
+        filteredTodos: filtered
+      };
     }),
     
   deleteTodo: (id) =>
     set((state) => {
       const updatedTodos = state.todos.filter((todo) => todo.id !== id);
       saveTodos(updatedTodos);
-      return { todos: updatedTodos };
+      
+      // Update filtered todos based on search term
+      const filtered = state.searchTerm.trim() === ""
+        ? updatedTodos
+        : fuzzySearchTodos(updatedTodos, state.searchTerm);
+      
+      return { 
+        todos: updatedTodos,
+        filteredTodos: filtered
+      };
     }),
     
   toggleCompleted: (id) =>
@@ -48,7 +92,16 @@ export const useTodoStore = create<TodoState>((set) => ({
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       );
       saveTodos(updatedTodos);
-      return { todos: updatedTodos };
+      
+      // Update filtered todos based on search term
+      const filtered = state.searchTerm.trim() === ""
+        ? updatedTodos
+        : fuzzySearchTodos(updatedTodos, state.searchTerm);
+      
+      return { 
+        todos: updatedTodos,
+        filteredTodos: filtered
+      };
     }),
     
   reorderActive: (startIndex, endIndex) =>
@@ -62,7 +115,15 @@ export const useTodoStore = create<TodoState>((set) => ({
       // Use setTimeout to avoid the flickering during dragging
       setTimeout(() => saveTodos(updatedTodos), 0);
       
-      return { todos: updatedTodos };
+      // Update filtered todos based on search term
+      const filtered = state.searchTerm.trim() === ""
+        ? updatedTodos
+        : fuzzySearchTodos(updatedTodos, state.searchTerm);
+      
+      return { 
+        todos: updatedTodos,
+        filteredTodos: filtered
+      };
     }),
     
   reorderCompleted: (startIndex, endIndex) =>
@@ -76,6 +137,14 @@ export const useTodoStore = create<TodoState>((set) => ({
       // Use setTimeout to avoid the flickering during dragging
       setTimeout(() => saveTodos(updatedTodos), 0);
       
-      return { todos: updatedTodos };
+      // Update filtered todos based on search term
+      const filtered = state.searchTerm.trim() === ""
+        ? updatedTodos
+        : fuzzySearchTodos(updatedTodos, state.searchTerm);
+      
+      return { 
+        todos: updatedTodos,
+        filteredTodos: filtered
+      };
     }),
 }));
