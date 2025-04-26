@@ -99,5 +99,7 @@
 /* Override default dialog styling */
 .floating-editor {
   border-radius: 0.5rem !important;
-  overflow: hidden;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto; /* Allow vertical scrolling */
+  max-height: 85vh; /* Limit height to ensure it fits on screen */
 }
