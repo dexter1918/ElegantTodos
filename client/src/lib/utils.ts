@@ -174,37 +174,59 @@ export function fuzzySearchTodos(todos: Todo[], searchTerm: string): Todo[] {
   
   const normalizedSearchTerm = searchTerm.toLowerCase().trim();
   
+  // Special case - search for "completed" or "done" to get completed tasks
+  if (normalizedSearchTerm === "completed" || normalizedSearchTerm === "done") {
+    return todos.filter(todo => todo.completed);
+  }
+  
+  // Special case - search for "active" or "incomplete" to get active tasks
+  if (normalizedSearchTerm === "active" || normalizedSearchTerm === "incomplete") {
+    return todos.filter(todo => !todo.completed);
+  }
+  
   return todos
     .map(todo => {
       // Initial score based on main text match
       let score = similarityScore(todo.text, normalizedSearchTerm);
       
-      // Check notes for matches too
+      // Check notes for matches too (we give this equal importance)
       if (todo.notes) {
         const notesScore = similarityScore(todo.notes, normalizedSearchTerm);
         // Take the better score between text and notes
         score = Math.max(score, notesScore);
       }
       
+      // Check for exact substring matches and boost score
+      if (todo.text.toLowerCase().includes(normalizedSearchTerm)) {
+        score += 30; // Significant boost for direct text substring match
+      }
+      
+      if (todo.notes && todo.notes.toLowerCase().includes(normalizedSearchTerm)) {
+        score += 30; // Significant boost for direct notes substring match
+      }
+      
       // Check category
       if (todo.category) {
         const categoryScore = similarityScore(todo.category, normalizedSearchTerm);
-        if (categoryScore > 70) { // Only boost if category is a good match
-          score = Math.max(score, categoryScore - 10); // Slightly less weight for category
+        if (categoryScore > 50) { // Lower threshold for category matches
+          score = Math.max(score, categoryScore);
         }
       }
       
       // Check due date
-      if (todo.dueDate && normalizedSearchTerm.includes("due")) {
+      if (todo.dueDate && (normalizedSearchTerm.includes("due") || normalizedSearchTerm.includes("date"))) {
         const formattedDate = formatDate(todo.dueDate);
-        if (formattedDate.toLowerCase().includes(normalizedSearchTerm.replace("due", "").trim())) {
-          score += 20; // Boost for date relevance
+        if (formattedDate.toLowerCase().includes(normalizedSearchTerm.replace(/due|date/g, "").trim())) {
+          score += 40; // Higher boost for date relevance
         }
       }
       
+      // Give a small baseline score to ensure results when terms are very different
+      score = Math.max(score, 5);
+      
       return { todo, score };
     })
-    .filter(item => item.score > 30) // Only include items with decent match
+    .filter(item => item.score > 10) // Lower threshold to include more potential matches
     .sort((a, b) => b.score - a.score) // Sort by score descending
     .map(item => item.todo); // Return just the todos
 }
