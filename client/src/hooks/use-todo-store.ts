@@ -59,7 +59,9 @@ export const useTodoStore = create<TodoState>((set) => ({
       const reorderedActive = reorderTodos(activeTodos, startIndex, endIndex);
       const updatedTodos = [...reorderedActive, ...completedTodos];
       
-      saveTodos(updatedTodos);
+      // Use setTimeout to avoid the flickering during dragging
+      setTimeout(() => saveTodos(updatedTodos), 0);
+      
       return { todos: updatedTodos };
     }),
     
@@ -71,7 +73,9 @@ export const useTodoStore = create<TodoState>((set) => ({
       const reorderedCompleted = reorderTodos(completedTodos, startIndex, endIndex);
       const updatedTodos = [...activeTodos, ...reorderedCompleted];
       
-      saveTodos(updatedTodos);
+      // Use setTimeout to avoid the flickering during dragging
+      setTimeout(() => saveTodos(updatedTodos), 0);
+      
       return { todos: updatedTodos };
     }),
 }));
