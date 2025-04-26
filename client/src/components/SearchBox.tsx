@@ -35,7 +35,7 @@ export function SearchBox() {
   };
   
   return (
-    <div className="relative flex items-center max-w-md mb-6">
+    <div className="relative flex items-center max-w-md">
       <div className={cn(
         "flex items-center w-full transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden",
         expanded ? "w-full opacity-100" : "w-10 opacity-80"
@@ -74,14 +74,7 @@ export function SearchBox() {
         )}
       </div>
       
-      {searchTerm && (
-        <div className="absolute -bottom-6 left-0 text-sm text-gray-500 dark:text-gray-400">
-          Searching for: <span className="font-medium text-primary">{searchTerm}</span>
-          <span className="ml-1 text-xs text-gray-400 dark:text-gray-500">
-            (in task text, notes, categories)
-          </span>
-        </div>
-      )}
+      {/* Removed the "Searching for..." prompt as requested */}
     </div>
   );
 }
