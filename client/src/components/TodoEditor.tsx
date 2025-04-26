@@ -67,16 +67,8 @@ export function TodoEditor({ todo, isOpen, onClose, onSave }: TodoEditorProps) {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="floating-editor bg-white rounded-lg shadow-lg w-full max-w-lg p-6 sm:max-w-md max-h-[90vh] overflow-y-auto">
-        <DialogHeader className="flex justify-between items-center mb-4">
+        <DialogHeader className="mb-4">
           <DialogTitle className="text-lg font-semibold text-gray-800">Edit Task</DialogTitle>
-          <Button
-            onClick={onClose}
-            variant="ghost"
-            size="icon"
-            className="text-gray-500 hover:text-gray-700 focus:outline-none"
-          >
-            <X className="h-4 w-4" />
-          </Button>
         </DialogHeader>
 
         <Form {...form}>
