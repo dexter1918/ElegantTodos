@@ -2,11 +2,22 @@ import { useState } from "react";
 import { AddTodoForm } from "@/components/AddTodoForm";
 import { TodoList } from "@/components/TodoList";
 import { TodoEditor } from "@/components/TodoEditor";
+import { SearchBox } from "@/components/SearchBox";
 import { useTodoStore } from "@/hooks/use-todo-store";
 import { Todo } from "@/lib/utils";
 
 export default function Home() {
-  const { todos, addTodo, updateTodo, deleteTodo, toggleCompleted, reorderActive, reorderCompleted } = useTodoStore();
+  const { 
+    todos, 
+    filteredTodos, 
+    searchTerm,
+    addTodo, 
+    updateTodo, 
+    deleteTodo, 
+    toggleCompleted, 
+    reorderActive, 
+    reorderCompleted 
+  } = useTodoStore();
   const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
 
@@ -37,10 +48,13 @@ export default function Home() {
         <p className="text-gray-600 dark:text-gray-400 mt-2">Organize your tasks efficiently</p>
       </header>
 
-      <AddTodoForm onAddTodo={handleAddTodo} />
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+        <AddTodoForm onAddTodo={handleAddTodo} />
+        <SearchBox />
+      </div>
 
       <TodoList
-        todos={todos}
+        todos={searchTerm ? filteredTodos : todos}
         onToggleComplete={toggleCompleted}
         onEdit={handleEditTodo}
         onDelete={deleteTodo}
