@@ -1,7 +1,8 @@
 import { Todo } from "@/lib/utils";
 import { TodoItem } from "./TodoItem";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { CircleCheck, CheckIcon } from "lucide-react";
+import { CircleCheck, CheckIcon, SearchX } from "lucide-react";
+import { useTodoStore } from "@/hooks/use-todo-store";
 
 interface TodoListProps {
   todos: Todo[];
@@ -20,6 +21,8 @@ export function TodoList({
   onReorderActive,
   onReorderCompleted,
 }: TodoListProps) {
+  const { searchTerm } = useTodoStore();
+  const isSearching = !!searchTerm.trim();
   const activeTodos = todos.filter((todo) => !todo.completed);
   const completedTodos = todos.filter((todo) => todo.completed);
 
@@ -52,10 +55,24 @@ export function TodoList({
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
+      {isSearching && (
+        <div className="mb-6 px-4 py-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-lg">
+          <p className="text-sm text-blue-600 dark:text-blue-300 flex items-center">
+            <SearchX size={16} className="mr-2" />
+            Showing search results for "<span className="font-medium">{searchTerm}</span>"
+            {todos.length === 0 ? (
+              <span className="ml-1">- No matches found</span>
+            ) : (
+              <span className="ml-1">- {todos.length} {todos.length === 1 ? 'match' : 'matches'} found</span>
+            )}
+          </p>
+        </div>
+      )}
+      
       <div id="todo-container" className="mb-8">
         <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100 flex items-center">
           <CircleCheck className="mr-2 text-primary" />
-          Active Tasks
+          {isSearching ? 'Matching Active Tasks' : 'Active Tasks'}
         </h2>
 
         <Droppable droppableId="active-todos">
