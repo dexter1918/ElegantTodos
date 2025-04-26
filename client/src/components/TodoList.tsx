@@ -95,7 +95,7 @@ export function TodoList({
         </h2>
 
         <Droppable droppableId="completed-todos">
-          {(provided) => (
+          {(provided: any) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
