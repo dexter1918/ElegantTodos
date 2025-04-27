@@ -1,13 +1,14 @@
 services:
   - type: web
     name: eleganttodos
-    runtime: node
-    buildCommand: bash ./build.sh
-    startCommand: node production-server.cjs
+    env: docker
+    plan: free
+    healthCheckPath: /api/todos
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
       - key: MONGODB_URI
-        sync: false
+        sync: false # This will be set manually in the Render dashboard
+    dockerfilePath: ./Dockerfile
