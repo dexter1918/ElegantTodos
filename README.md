@@ -17,25 +17,40 @@ A modern, user-friendly todo list application designed for efficient task manage
 2. Install dependencies: `npm install`
 3. Start the development server: `npm run dev`
 
-## Deployment to GitHub Pages
+## Deployment to Render.com
 
-### Automated Deployment (using GitHub Actions)
+This application is configured for deployment on Render.com, which provides a seamless hosting experience with automatic deployments.
 
-This repository includes a GitHub Actions workflow configuration in `.github/workflows/deploy.yml` that automatically deploys the app to GitHub Pages when changes are pushed to the main branch.
+### Deployment Using render.yaml (Recommended)
 
-To enable automated deployment:
+This repository includes a `render.yaml` file that simplifies the deployment process:
 
-1. Go to your GitHub repository settings
-2. Enable GitHub Pages from the "Pages" section
-3. Set the source to "GitHub Actions"
+1. Create an account on [Render.com](https://render.com/)
+2. Connect your GitHub repository
+3. Click "New" and select "Blueprint" to deploy using the render.yaml configuration
+4. Render will automatically set up the services defined in the render.yaml file
 
 ### Manual Deployment
 
-Alternatively, you can deploy manually using the included script:
+Alternatively, you can deploy manually:
 
-1. Make the script executable: `chmod +x deploy.sh`
-2. Run the deployment script: `./deploy.sh`
-3. Follow the instructions shown in the terminal
+1. Create a new Web Service on Render.com
+2. Connect your GitHub repository
+3. Configure the service with the following settings:
+   - Build Command: `npm install && npm run build`
+   - Start Command: `npm start`
+   - Environment Variables:
+     - `NODE_ENV`: `production`
+     - `DATABASE_URL`: (if using a database)
+     - `PORT`: `5000`
+
+### Database Setup (Optional)
+
+If you're using the PostgreSQL database features:
+
+1. Create a PostgreSQL database on Render.com or your preferred provider
+2. Add the `DATABASE_URL` environment variable with your connection string
+3. Run database migrations using the Render.com console or during the build process
 
 ## License
 
