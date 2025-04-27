@@ -13,8 +13,18 @@ todoRouter.get('/', async (req: Request, res: Response) => {
       return res.json([]);
     }
     
-    const todos = await Todo.find({}).sort({ createdAt: -1 });
-    res.json(todos);
+    try {
+      const todos = await Todo.find({});
+      // Sort in memory since we have a custom find implementation
+      const sortedTodos = todos.sort((a: any, b: any) => 
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+      res.json(sortedTodos);
+    } catch (sortError) {
+      console.error('Error sorting todos:', sortError);
+      const todos = await Todo.find({});
+      res.json(todos);
+    }
   } catch (error) {
     console.error('Error getting todos:', error);
     log(`Error getting todos: ${error}`, 'api');
@@ -78,8 +88,8 @@ todoRouter.post('/', async (req: Request, res: Response) => {
       return res.status(201).json(req.body); // Return the todo as-is for client-side storage
     }
     
-    const newTodo = new Todo(req.body);
-    const savedTodo = await newTodo.save();
+    // Use the custom saveTask method that handles collection routing
+    const savedTodo = await Todo.saveTask(req.body);
     res.status(201).json(savedTodo);
   } catch (error) {
     console.error('Error creating todo:', error);
