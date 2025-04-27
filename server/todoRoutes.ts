@@ -106,6 +106,7 @@ todoRouter.post('/', async (req: Request, res: Response) => {
     
     // Use the custom saveTask method that handles collection routing
     const savedTodo = await Todo.saveTask(req.body);
+    console.log(`Created new todo in ${savedTodo.completed ? 'CompletedTasks' : 'ActiveTasks'} collection`);
     res.status(201).json(savedTodo);
   } catch (error) {
     console.error('Error creating todo:', error);
@@ -125,17 +126,37 @@ todoRouter.put('/:id', async (req: Request, res: Response) => {
       return res.json(req.body); // Return the todo as-is for client-side storage
     }
     
-    const updatedTodo = await Todo.findOneAndUpdate(
-      { id: req.params.id },
-      req.body,
-      { new: true, runValidators: true }
-    );
+    // First find the existing todo
+    const existingTodo = await Todo.findOne({ id: req.params.id });
     
-    if (!updatedTodo) {
+    if (!existingTodo) {
       return res.status(404).json({ error: 'Todo not found' });
     }
     
-    res.json(updatedTodo);
+    // Check if we're changing completion status (which means moving between collections)
+    const isChangingCompletion = req.body.completed !== undefined && 
+                                req.body.completed !== existingTodo.completed;
+    
+    if (isChangingCompletion) {
+      // Use saveTask for collection switching
+      const updatedData = { ...existingTodo.toObject(), ...req.body };
+      const updatedTodo = await Todo.saveTask(updatedData);
+      console.log(`Moved todo ${req.params.id} to ${updatedTodo.completed ? 'CompletedTasks' : 'ActiveTasks'} collection`);
+      return res.json(updatedTodo);
+    } else {
+      // Regular update without changing collections
+      const updatedTodo = await Todo.findOneAndUpdate(
+        { id: req.params.id },
+        req.body,
+        { new: true, runValidators: true }
+      );
+      
+      if (!updatedTodo) {
+        return res.status(404).json({ error: 'Todo not found' });
+      }
+      
+      return res.json(updatedTodo);
+    }
   } catch (error) {
     console.error('Error updating todo:', error);
     log(`Error updating todo ${req.params.id}: ${error}`, 'api');
@@ -162,9 +183,11 @@ todoRouter.patch('/:id/toggle', async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'Todo not found' });
     }
     
-    todo.completed = !todo.completed;
-    const updatedTodo = await todo.save();
+    // Use the improved saveTask method to handle collection switching
+    const updatedData = { ...todo.toObject(), completed: !todo.completed };
+    const updatedTodo = await Todo.saveTask(updatedData);
     
+    console.log(`Moved todo ${req.params.id} to ${updatedTodo.completed ? 'CompletedTasks' : 'ActiveTasks'} collection`);
     res.json(updatedTodo);
   } catch (error) {
     console.error('Error toggling todo completion:', error);
