@@ -1,22 +1,13 @@
 services:
-  # Backend service
   - type: web
-    name: todo-app-api
-    env: node
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    name: eleganttodos
+    runtime: node
+    buildCommand: bash ./deploy.sh
+    startCommand: node deploy-server.cjs
     envVars:
       - key: NODE_ENV
         value: production
-      - key: MONGODB_URI
-        fromDatabase:
-          name: todo-db-mongo
-          property: connectionString
       - key: PORT
-        value: 5000
-
-databases:
-  - name: todo-db-mongo
-    plan: free
-    type: mongodb
-    ipAllowList: [] # Allow connections from anywhere
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
