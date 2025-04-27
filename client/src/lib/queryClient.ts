@@ -1,5 +1,25 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
+// Get API URL from environment or fall back to current origin
+const getApiBaseUrl = (): string => {
+  // In production, API might be on a different domain
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL as string;
+  }
+  
+  // In development, use the same origin
+  return window.location.origin;
+};
+
+// Utility to build full API URLs
+export const getApiUrl = (path: string): string => {
+  const baseUrl = getApiBaseUrl();
+  // Make sure path starts with slash if it doesn't already
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  
+  return `${baseUrl}${normalizedPath}`;
+};
+
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     const text = (await res.text()) || res.statusText;
@@ -12,7 +32,10 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  const res = await fetch(url, {
+  // Convert relative API paths to absolute URLs
+  const fullUrl = url.startsWith('http') ? url : getApiUrl(url);
+  
+  const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
@@ -29,7 +52,12 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey[0] as string, {
+    // Use getApiUrl to ensure proper URL formatting
+    const url = typeof queryKey[0] === 'string' 
+      ? (queryKey[0].startsWith('http') ? queryKey[0] : getApiUrl(queryKey[0]))
+      : queryKey[0];
+      
+    const res = await fetch(url as string, {
       credentials: "include",
     });
 
