@@ -1,0 +1,67 @@
+2025-04-27T20:25:03.908573811Z Installing main dependencies...
+2025-04-27T20:25:10.547779992Z 
+2025-04-27T20:25:10.547799443Z added 461 packages, and audited 462 packages in 7s
+2025-04-27T20:25:10.547858154Z 
+2025-04-27T20:25:10.547888344Z 59 packages are looking for funding
+2025-04-27T20:25:10.547899485Z   run `npm fund` for details
+2025-04-27T20:25:10.548823552Z 
+2025-04-27T20:25:10.548831722Z found 0 vulnerabilities
+2025-04-27T20:25:10.616453901Z Setting up client build...
+2025-04-27T20:25:24.200519585Z 
+2025-04-27T20:25:24.200548535Z added 35 packages, and audited 36 packages in 14s
+2025-04-27T20:25:24.200563035Z 
+2025-04-27T20:25:24.200570895Z 4 packages are looking for funding
+2025-04-27T20:25:24.200575126Z   run `npm fund` for details
+2025-04-27T20:25:24.201412621Z 
+2025-04-27T20:25:24.201425161Z found 0 vulnerabilities
+2025-04-27T20:25:24.228139151Z Building client application...
+2025-04-27T20:25:24.318911881Z 
+2025-04-27T20:25:24.318935171Z > elegant-todos-client@0.0.0 build
+2025-04-27T20:25:24.318940831Z > vite build
+2025-04-27T20:25:24.318944641Z 
+2025-04-27T20:25:24.323582298Z sh: 1: vite: not found
+2025-04-27T20:25:24.330959466Z Copying client build to server/public...
+2025-04-27T20:25:24.334182206Z cp: cannot stat 'client/dist/*': No such file or directory
+2025-04-27T20:25:24.334409971Z Setting up deployment server...
+2025-04-27T20:25:24.356543675Z Deployment setup complete!
+2025-04-27T20:25:24.356558555Z Run 'node deploy-server.cjs' to start the server
+2025-04-27T20:25:25.147077953Z ==> Uploading build...
+2025-04-27T20:25:37.695757619Z ==> Uploaded in 9.9s. Compression took 2.6s
+2025-04-27T20:25:37.719452525Z ==> Build successful 🎉
+2025-04-27T20:25:39.338308513Z ==> Deploying...
+2025-04-27T20:25:55.571963001Z ==> Running 'node deploy-server.cjs'
+2025-04-27T20:25:55.685828573Z /opt/render/project/src/deploy-server.cjs:2
+2025-04-27T20:25:55.685845463Z const express = require "express";
+2025-04-27T20:25:55.685848094Z                         ^^^^^^^^^
+2025-04-27T20:25:55.685850174Z 
+2025-04-27T20:25:55.685852874Z SyntaxError: Unexpected string
+2025-04-27T20:25:55.685856024Z     at wrapSafe (node:internal/modules/cjs/loader:1486:18)
+2025-04-27T20:25:55.685859004Z     at Module._compile (node:internal/modules/cjs/loader:1528:20)
+2025-04-27T20:25:55.685861214Z     at Object..js (node:internal/modules/cjs/loader:1706:10)
+2025-04-27T20:25:55.685863274Z     at Module.load (node:internal/modules/cjs/loader:1289:32)
+2025-04-27T20:25:55.685865284Z     at Function._load (node:internal/modules/cjs/loader:1108:12)
+2025-04-27T20:25:55.685867394Z     at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+2025-04-27T20:25:55.685869524Z     at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+2025-04-27T20:25:55.685872034Z     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:170:5)
+2025-04-27T20:25:55.685875634Z     at node:internal/main/run_main_module:36:49
+2025-04-27T20:25:55.685877594Z 
+2025-04-27T20:25:55.685879644Z Node.js v22.14.0
+2025-04-27T20:25:57.75373266Z ==> Exited with status 1
+2025-04-27T20:25:57.771497497Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2025-04-27T20:26:01.799718451Z ==> Running 'node deploy-server.cjs'
+2025-04-27T20:26:01.999097731Z /opt/render/project/src/deploy-server.cjs:2
+2025-04-27T20:26:01.999131972Z const express = require "express";
+2025-04-27T20:26:01.999135482Z                         ^^^^^^^^^
+2025-04-27T20:26:01.999137572Z 
+2025-04-27T20:26:01.999140912Z SyntaxError: Unexpected string
+2025-04-27T20:26:01.999143972Z     at wrapSafe (node:internal/modules/cjs/loader:1486:18)
+2025-04-27T20:26:01.999147092Z     at Module._compile (node:internal/modules/cjs/loader:1528:20)
+2025-04-27T20:26:01.999149622Z     at Object..js (node:internal/modules/cjs/loader:1706:10)
+2025-04-27T20:26:01.999151572Z     at Module.load (node:internal/modules/cjs/loader:1289:32)
+2025-04-27T20:26:01.999153092Z     at Function._load (node:internal/modules/cjs/loader:1108:12)
+2025-04-27T20:26:01.999154622Z     at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+2025-04-27T20:26:01.999156152Z     at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+2025-04-27T20:26:01.999158372Z     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:170:5)
+2025-04-27T20:26:01.999161122Z     at node:internal/main/run_main_module:36:49
+2025-04-27T20:26:01.999162592Z 
+2025-04-27T20:26:01.999164392Z Node.js v22.14.0
