@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "10000:10000"
+    environment:
+      - NODE_ENV=production
+      - PORT=10000
+      - MONGODB_URI=${MONGODB_URI}
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:10000/api/todos"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
