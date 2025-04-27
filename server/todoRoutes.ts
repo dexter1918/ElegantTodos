@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { Todo } from '../models/Todo';
+import { Todo, TodoModelInterface } from '../models/Todo';
 import { log } from './vite';
 
 const todoRouter = Router();
@@ -48,20 +48,36 @@ todoRouter.get('/search/:term', async (req: Request, res: Response) => {
     }
     
     const searchTerm = req.params.term;
+    console.log(`Searching todos with term: "${searchTerm}"`);
     
     try {
-      // We need to do this differently with our custom Todo implementation
-      const todos = await Todo.find();
+      // Get the mongoose models we're using for both collections
+      const { ActiveTaskModel, CompletedTaskModel } = (Todo as any as TodoModelInterface).getModels();
       
-      // Implement simple search logic in-memory
-      const filteredTodos = todos.filter((todo: any) => {
-        const text = todo.text || '';
-        const notes = todo.notes || '';
-        return text.toLowerCase().includes(searchTerm.toLowerCase()) || 
-               notes.toLowerCase().includes(searchTerm.toLowerCase());
-      });
+      // Create a case-insensitive search regex
+      const searchRegex = new RegExp(searchTerm, 'i');
       
-      res.json(filteredTodos);
+      // Search in both collections with the same query
+      const searchQuery = {
+        $or: [
+          { text: searchRegex },
+          { notes: searchRegex },
+          // Also search in category if available
+          { category: searchRegex }
+        ]
+      };
+      
+      // Perform searches in both collections
+      const [activeTodos, completedTodos] = await Promise.all([
+        ActiveTaskModel.find(searchQuery),
+        CompletedTaskModel.find(searchQuery)
+      ]);
+      
+      // Combine the results
+      const allResults = [...activeTodos, ...completedTodos];
+      console.log(`Found ${allResults.length} todos matching "${searchTerm}" (${activeTodos.length} active, ${completedTodos.length} completed)`);
+      
+      res.json(allResults);
     } catch (searchError) {
       console.error('Error processing search:', searchError);
       // Fallback to empty results
@@ -105,7 +121,7 @@ todoRouter.post('/', async (req: Request, res: Response) => {
     }
     
     // Use the custom saveTask method that handles collection routing
-    const savedTodo = await Todo.saveTask(req.body);
+    const savedTodo = await (Todo as any as TodoModelInterface).saveTask(req.body);
     console.log(`Created new todo in ${savedTodo.completed ? 'CompletedTasks' : 'ActiveTasks'} collection`);
     res.status(201).json(savedTodo);
   } catch (error) {
@@ -140,7 +156,7 @@ todoRouter.put('/:id', async (req: Request, res: Response) => {
     if (isChangingCompletion) {
       // Use saveTask for collection switching
       const updatedData = { ...existingTodo.toObject(), ...req.body };
-      const updatedTodo = await Todo.saveTask(updatedData);
+      const updatedTodo = await (Todo as any as TodoModelInterface).saveTask(updatedData);
       console.log(`Moved todo ${req.params.id} to ${updatedTodo.completed ? 'CompletedTasks' : 'ActiveTasks'} collection`);
       return res.json(updatedTodo);
     } else {
@@ -185,7 +201,7 @@ todoRouter.patch('/:id/toggle', async (req: Request, res: Response) => {
     
     // Use the improved saveTask method to handle collection switching
     const updatedData = { ...todo.toObject(), completed: !todo.completed };
-    const updatedTodo = await Todo.saveTask(updatedData);
+    const updatedTodo = await (Todo as any as TodoModelInterface).saveTask(updatedData);
     
     console.log(`Moved todo ${req.params.id} to ${updatedTodo.completed ? 'CompletedTasks' : 'ActiveTasks'} collection`);
     res.json(updatedTodo);
