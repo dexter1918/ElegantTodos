@@ -1,36 +1,14 @@
-name: Deploy to GitHub Pages
+# This workflow file is deprecated and will be removed when you manually delete the .github folder
+# The project now uses Render.com for deployment instead of GitHub Pages
+
+name: Deprecated - Do Not Use
 
 on:
-  push:
-    branches:
-      - main  # or your default branch
+  workflow_dispatch:  # Only manual triggers, not on push
 
 jobs:
-  build:
+  info:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          
-      - name: Install dependencies
-        run: npm ci
-        
-      - name: Build frontend for GitHub Pages
-        run: npx vite build --outDir=gh-pages-dist client
-        
-      - name: Run deployment preparation script
-        run: node deploy-to-gh-pages.js
-        env:
-          REPO_NAME: ${{ github.repository }}
-        
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./gh-pages-dist
+      - name: Display Info
+        run: echo "This workflow is deprecated. The project now uses Render.com for deployment."
