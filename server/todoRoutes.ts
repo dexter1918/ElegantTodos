@@ -9,7 +9,9 @@ todoRouter.get('/', async (req: Request, res: Response) => {
   try {
     // Check if connected to MongoDB
     if (!Todo.db.readyState) {
-      console.log('MongoDB not connected, returning empty todos array');
+      console.log('MongoDB not connected, returning local todos array');
+      // Return a specific header to indicate we're in localStorage mode
+      res.set('X-Storage-Mode', 'localStorage');
       return res.json([]);
     }
     

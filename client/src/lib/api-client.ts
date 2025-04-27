@@ -4,16 +4,47 @@ import { apiRequest, getApiUrl } from "./queryClient";
 // API endpoints for Todo CRUD operations
 const TODO_API = "/api/todos";
 
+// Import store to update connection mode
+import { useTodoStore } from "@/hooks/use-todo-store";
+import { loadTodos } from "./utils";
+
 // Get all todos
 export const fetchTodos = async (): Promise<Todo[]> => {
-  const response = await fetch(getApiUrl(TODO_API));
-  
-  if (!response.ok) {
-    throw new Error("Failed to fetch todos");
+  try {
+    const response = await fetch(getApiUrl(TODO_API));
+    
+    if (!response.ok) {
+      throw new Error("Failed to fetch todos");
+    }
+    
+    // Check for storage mode header
+    const storageMode = response.headers.get('X-Storage-Mode');
+    if (storageMode === 'localStorage') {
+      console.log('Server is in localStorage mode, using client-side data');
+      // Set connection mode in the store
+      const state = useTodoStore.getState();
+      if (state.connectionMode !== 'localStorage') {
+        state.setConnectionMode('localStorage');
+      }
+      return loadTodos();
+    }
+    
+    // If we got a valid server response, we're connected to MongoDB
+    const state = useTodoStore.getState();
+    if (state.connectionMode !== 'mongoDB') {
+      state.setConnectionMode('mongoDB');
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching todos:', error);
+    // Set connection mode to localStorage
+    const state = useTodoStore.getState();
+    state.setConnectionMode('localStorage');
+    // Fallback to localStorage
+    return loadTodos();
   }
-  
-  const data = await response.json();
-  return data;
 };
 
 // Create a new todo

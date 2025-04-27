@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ReminderNotifications } from "@/components/ReminderNotifications";
+import { ConnectionStatus } from "@/components/ConnectionStatus";
 
 function Router() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <ThemeToggle />
           </div>
           <Router />
+          <ConnectionStatus />
           <ReminderNotifications />
           <Toaster />
         </div>
