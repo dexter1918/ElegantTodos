@@ -1,5 +1,5 @@
 import { mongoose } from '../db/mongodb';
-import { Schema, Document, model } from 'mongoose';
+import { Schema, Document, model, Model } from 'mongoose';
 
 // Interface to define a Todo document
 export interface ITodo extends Document {
@@ -74,9 +74,26 @@ todoSchema.index({ text: 'text', notes: 'text' }); // Text index for search func
 const ActiveTaskModel = model<ITodo>('ActiveTask', todoSchema, 'ActiveTasks');
 const CompletedTaskModel = model<ITodo>('CompletedTask', todoSchema, 'CompletedTasks');
 
+// Define a type for our custom Todo model with extra methods
+export interface TodoModelInterface extends Model<ITodo> {
+  getModels: () => { 
+    ActiveTaskModel: Model<ITodo>; 
+    CompletedTaskModel: Model<ITodo> 
+  };
+  saveTask: (taskData: any) => Promise<Document<unknown, {}, ITodo> & ITodo>;
+}
+
 // Create a unified Todo "model" that handles both collections
 export const Todo = {
   ...ActiveTaskModel,
+  
+  // Expose the models for direct access when needed
+  getModels: () => {
+    return { 
+      ActiveTaskModel, 
+      CompletedTaskModel 
+    };
+  },
   
   find: async (query: any = {}) => {
     // Combine results from both collections
