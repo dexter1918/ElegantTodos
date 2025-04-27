@@ -2,60 +2,35 @@ import mongoose from 'mongoose';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import { log } from '../server/vite';
 
-// MongoDB connection URL
+// MongoDB connection URL from environment variable
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/todo_app';
 const DB_NAME = "ElegantTodosDB"; // Your database name
 
 // Connect to MongoDB with timeout
 export const connectToMongoDB = async (): Promise<void> => {
   return new Promise<void>(async (resolve) => {
+    console.log('Starting MongoDB connection process...');
+    
     // Set timeout to avoid hanging the server startup
     const timeout = setTimeout(() => {
       console.error('MongoDB connection timeout - proceeding with local storage mode');
       log('MongoDB connection timeout - using local storage fallback', 'mongodb');
       resolve();
-    }, 8000); // 8 second timeout
+    }, 10000); // 10 second timeout
     
     try {
       console.log('Attempting to connect to MongoDB...');
       console.log(`MongoDB URI: ${MONGODB_URI.slice(0, 15)}...`); // Only show the beginning for security
 
-      // MongoDB client options
-      const clientOptions = {
-        serverApi: {
-          version: ServerApiVersion.v1,
-          strict: true,
-          deprecationErrors: true,
-        },
-        ssl: true,
-        tlsAllowInvalidCertificates: false,
-        tlsCAFile: undefined, // Atlas uses system CA certs
-      };
-      
-      // Mongoose connection options
-      const mongooseOptions = {
-        serverSelectionTimeoutMS: 7000, // Default is 30 seconds
-        connectTimeoutMS: 10000, // Default is no timeout
-        dbName: DB_NAME, // Specify database name
-        ssl: true,
-        tls: true,
-        tlsAllowInvalidCertificates: false,
-      };
-      
-      // Try the direct MongoClient connection first to verify connectivity
-      try {
-        const client = new MongoClient(MONGODB_URI, clientOptions);
-        await client.connect();
-        await client.db("admin").command({ ping: 1 });
-        console.log("✓ MongoDB Atlas ping successful!");
-        await client.close();
-      } catch (pingError) {
-        console.error("MongoDB Atlas ping failed:", pingError);
-        throw pingError; // Rethrow to be caught by the outer try/catch
-      }
-      
-      // If ping successful, connect with Mongoose
-      await mongoose.connect(MONGODB_URI, mongooseOptions);
+      // Simplified connection - using just Mongoose with appropriate options
+      await mongoose.connect(MONGODB_URI, {
+        serverSelectionTimeoutMS: 8000,  
+        socketTimeoutMS: 10000,
+        connectTimeoutMS: 10000,
+        dbName: DB_NAME,
+        ssl: true,           // Enable SSL for secure connections
+        tls: true,           // Enable TLS for secure connections
+      });
       
       clearTimeout(timeout);
       console.log('Connected to MongoDB successfully!');
@@ -69,6 +44,8 @@ export const connectToMongoDB = async (): Promise<void> => {
       // Fallback to local in-memory mode for testing/development
       log('Starting server without MongoDB connection - using local storage fallback', 'mongodb');
       resolve();
+    } finally {
+      console.log('MongoDB connection process completed');
     }
   });
 };
