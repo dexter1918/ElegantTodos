@@ -1,8 +1,19 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import cors from "cors";
 
 const app = express();
+// Enable CORS for all routes or specific origins
+const corsOptions = {
+  origin: process.env.NODE_ENV === "production" 
+    ? ["https://your-render-domain.onrender.com", "https://your-custom-domain.com"] 
+    : "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
