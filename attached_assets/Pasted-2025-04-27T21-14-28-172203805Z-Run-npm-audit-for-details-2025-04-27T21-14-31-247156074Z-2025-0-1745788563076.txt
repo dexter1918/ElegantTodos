@@ -1,0 +1,50 @@
+2025-04-27T21:14:28.172203805Z Run `npm audit` for details.
+2025-04-27T21:14:31.247156074Z 
+2025-04-27T21:14:31.247180945Z added 13 packages in 3s
+2025-04-27T21:14:31.247211466Z 
+2025-04-27T21:14:31.247257057Z 5 packages are looking for funding
+2025-04-27T21:14:31.247279717Z   run `npm fund` for details
+2025-04-27T21:14:31.420468415Z Vite version: vite/6.3.3 linux-x64 node-v22.14.0
+2025-04-27T21:14:31.517660277Z 
+2025-04-27T21:14:31.517681737Z > elegant-todos-client@0.0.0 build
+2025-04-27T21:14:31.517686067Z > vite build
+2025-04-27T21:14:31.517689367Z 
+2025-04-27T21:14:31.697108671Z vite v5.4.18 building for production...
+2025-04-27T21:14:31.74431794Z transforming...
+2025-04-27T21:14:31.874184163Z node:internal/process/promises:394
+2025-04-27T21:14:31.874203753Z     triggerUncaughtException(err, true /* fromPromise */);
+2025-04-27T21:14:31.874207524Z     ^
+2025-04-27T21:14:31.874210214Z 
+2025-04-27T21:14:31.874215814Z [Failed to load PostCSS config: Failed to load PostCSS config (searchPath: /opt/render/project/src/client): [Error] Loading PostCSS Plugin failed: Cannot find module 'autoprefixer'
+2025-04-27T21:14:31.874220124Z Require stack:
+2025-04-27T21:14:31.874247715Z - /opt/render/project/src/client/postcss.config.js
+2025-04-27T21:14:31.874252505Z 
+2025-04-27T21:14:31.874256595Z (@/opt/render/project/src/client/postcss.config.js)
+2025-04-27T21:14:31.874261275Z Error: Loading PostCSS Plugin failed: Cannot find module 'autoprefixer'
+2025-04-27T21:14:31.874265825Z Require stack:
+2025-04-27T21:14:31.874269865Z - /opt/render/project/src/client/postcss.config.js
+2025-04-27T21:14:31.874272455Z 
+2025-04-27T21:14:31.874275105Z (@/opt/render/project/src/client/postcss.config.js)
+2025-04-27T21:14:31.874278415Z     at load (file:///opt/render/project/src/client/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:33632:11)
+2025-04-27T21:14:31.874285136Z     at file:///opt/render/project/src/client/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:33657:16
+2025-04-27T21:14:31.874306406Z     at Array.map (<anonymous>)
+2025-04-27T21:14:31.874310126Z     at plugins (file:///opt/render/project/src/client/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:33656:8)
+2025-04-27T21:14:31.874312766Z     at processResult (file:///opt/render/project/src/client/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:33726:14)
+2025-04-27T21:14:31.874315327Z     at file:///opt/render/project/src/client/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:33856:14]
+2025-04-27T21:14:31.874316796Z 
+2025-04-27T21:14:31.874318396Z Node.js v22.14.0
+2025-04-27T21:14:31.889291766Z Setting up static files...
+2025-04-27T21:14:31.89095297Z Error: client/dist directory not found. Build may have failed.
+2025-04-27T21:14:31.891007041Z Build completed successfully!
+2025-04-27T21:14:35.174773196Z ==> Uploading build...
+2025-04-27T21:14:45.0289794Z ==> Uploaded in 5.7s. Compression took 4.1s
+2025-04-27T21:14:45.060697245Z ==> Build successful 🎉
+2025-04-27T21:14:47.49336699Z ==> Deploying...
+2025-04-27T21:15:09.733522433Z ==> Running 'node production-server.cjs'
+2025-04-27T21:15:12.739452515Z Attempting to connect to MongoDB...
+2025-04-27T21:15:12.739675261Z MongoDB URI: mongodb+srv://***:***@cluster0.zqtciro.mongodb.net/ElegantTodosDB
+2025-04-27T21:15:15.199470592Z Connected to MongoDB successfully!
+2025-04-27T21:15:15.23527665Z ElegantTodos server running on port 10000
+2025-04-27T21:15:18.033203158Z GET /api/health 404 in 5ms :: {"error":"API endpoint not found"}
+2025-04-27T21:15:28.027472145Z GET /api/health 404 in 2ms :: {"error":"API endpoint not found"}
+2025-04-27T21:15:38.027007143Z GET /api/health 404 in 1ms :: {"error":"API endpoint not found"}
