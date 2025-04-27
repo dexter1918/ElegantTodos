@@ -1,0 +1,49 @@
+2025-04-27T19:52:57.572856848Z ==> Cloning from https://github.com/dexter1918/ElegantTodos
+2025-04-27T19:52:58.019881282Z ==> Checking out commit 3225ea1f94d4c8bac55bb284dcd34b9caef30347 in branch replit-agent
+2025-04-27T19:52:59.632730317Z ==> Using Node.js version 22.14.0 (default)
+2025-04-27T19:52:59.657781099Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2025-04-27T19:53:01.476178345Z ==> Using Bun version 1.1.0 (default)
+2025-04-27T19:53:01.476192305Z ==> Docs on specifying a bun version: https://render.com/docs/bun-version
+2025-04-27T19:53:01.5214431Z ==> Running build command 'npm install --include=dev && cd client && npm install && npx vite build && cd .. && mkdir -p server/public && cp -r client/dist/* server/public/'...
+2025-04-27T19:53:08.922741203Z 
+2025-04-27T19:53:08.922773394Z added 541 packages, and audited 542 packages in 7s
+2025-04-27T19:53:08.922818845Z 
+2025-04-27T19:53:08.922827365Z 68 packages are looking for funding
+2025-04-27T19:53:08.922835905Z   run `npm fund` for details
+2025-04-27T19:53:08.949393045Z 
+2025-04-27T19:53:08.949414535Z 5 moderate severity vulnerabilities
+2025-04-27T19:53:08.949418145Z 
+2025-04-27T19:53:08.949422555Z To address all issues (including breaking changes), run:
+2025-04-27T19:53:08.949426475Z   npm audit fix --force
+2025-04-27T19:53:08.949429625Z 
+2025-04-27T19:53:08.949433245Z Run `npm audit` for details.
+2025-04-27T19:53:10.029220768Z 
+2025-04-27T19:53:10.029239249Z up to date, audited 462 packages in 954ms
+2025-04-27T19:53:10.029248409Z 
+2025-04-27T19:53:10.029254539Z 59 packages are looking for funding
+2025-04-27T19:53:10.029267289Z   run `npm fund` for details
+2025-04-27T19:53:10.030579163Z 
+2025-04-27T19:53:10.030587983Z found 0 vulnerabilities
+2025-04-27T19:53:19.285008041Z vite v6.3.3 building for production...
+2025-04-27T19:53:19.384635488Z transforming...
+2025-04-27T19:53:19.568348625Z ✓ 3 modules transformed.
+2025-04-27T19:53:19.568656271Z ✗ Build failed in 232ms
+2025-04-27T19:53:19.568723752Z error during build:
+2025-04-27T19:53:19.568729112Z [vite:css] Failed to load PostCSS config (searchPath: /opt/render/project/src/client): [Error] Loading PostCSS Plugin failed: Cannot find module 'autoprefixer'
+2025-04-27T19:53:19.568732083Z Require stack:
+2025-04-27T19:53:19.568735773Z - /opt/render/project/src/postcss.config.js
+2025-04-27T19:53:19.568738283Z 
+2025-04-27T19:53:19.568741033Z (@/opt/render/project/src/postcss.config.js)
+2025-04-27T19:53:19.568744393Z Error: Loading PostCSS Plugin failed: Cannot find module 'autoprefixer'
+2025-04-27T19:53:19.568747093Z Require stack:
+2025-04-27T19:53:19.568749713Z - /opt/render/project/src/postcss.config.js
+2025-04-27T19:53:19.568752183Z 
+2025-04-27T19:53:19.568754773Z (@/opt/render/project/src/postcss.config.js)
+2025-04-27T19:53:19.568757943Z     at load (file:///opt/render/.cache/_npx/9ed06546b0653f96/node_modules/vite/dist/node/chunks/dep-BMIURPaQ.js:11776:11)
+2025-04-27T19:53:19.568760483Z     at async Promise.all (index 1)
+2025-04-27T19:53:19.568763443Z     at async plugins (file:///opt/render/.cache/_npx/9ed06546b0653f96/node_modules/vite/dist/node/chunks/dep-BMIURPaQ.js:11805:12)
+2025-04-27T19:53:19.568765973Z     at async processResult (file:///opt/render/.cache/_npx/9ed06546b0653f96/node_modules/vite/dist/node/chunks/dep-BMIURPaQ.js:11876:14)
+2025-04-27T19:53:19.568769073Z file: /opt/render/project/src/client/src/index.css
+2025-04-27T19:53:19.568771493Z 
+2025-04-27T19:53:19.649666945Z ==> Build failed 😞
+2025-04-27T19:53:19.649686095Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
