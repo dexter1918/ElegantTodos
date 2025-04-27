@@ -21,10 +21,14 @@ todoRouter.get('/', async (req: Request, res: Response) => {
       const sortedTodos = todos.sort((a: any, b: any) => 
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
+      // Set a header to indicate we're using MongoDB
+      res.set('X-Storage-Mode', 'mongoDB');
       res.json(sortedTodos);
     } catch (sortError) {
       console.error('Error sorting todos:', sortError);
       const todos = await Todo.find({});
+      // Set a header to indicate we're using MongoDB
+      res.set('X-Storage-Mode', 'mongoDB');
       res.json(todos);
     }
   } catch (error) {
