@@ -2,7 +2,7 @@ services:
   - type: web
     name: eleganttodos
     runtime: node
-    buildCommand: npm install
+    buildCommand: bash ./build.sh
     startCommand: node production-server.cjs
     envVars:
       - key: NODE_ENV
