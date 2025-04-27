@@ -22,14 +22,19 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <div className="relative">
+        <div className="relative min-h-screen flex flex-col">
           <div className="fixed top-4 right-4 z-50">
             <ThemeToggle />
           </div>
-          <Router />
-          <ConnectionStatus />
-          <ReminderNotifications />
-          <Toaster />
+          <div className="flex-grow">
+            <Router />
+            <ConnectionStatus />
+            <ReminderNotifications />
+            <Toaster />
+          </div>
+          <footer className="py-3 text-center text-sm text-muted-foreground border-t">
+            <p>© {new Date().getFullYear()} Sk. Salman Haider. All rights reserved.</p>
+          </footer>
         </div>
       </ThemeProvider>
     </QueryClientProvider>
