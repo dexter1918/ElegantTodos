@@ -141,7 +141,14 @@ const app = express();
 
 // Enable CORS
 const corsOptions = {
-  origin: "*",
+  origin: process.env.NODE_ENV === 'production' 
+    ? [
+        "https://eleganttodos.onrender.com",
+        "https://eleganttodos.onrender.com/",
+        "http://localhost:5000", 
+        "http://localhost:3000"
+      ]
+    : "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204
