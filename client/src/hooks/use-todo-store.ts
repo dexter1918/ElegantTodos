@@ -13,6 +13,8 @@ interface TodoState {
   filteredTodos: Todo[];
   isLoading: boolean;
   error: string | null;
+  connectionMode: 'loading' | 'mongoDB' | 'localStorage';
+  setConnectionMode: (mode: 'mongoDB' | 'localStorage') => void;
   loadTodos: () => Promise<void>;
   addTodo: (text: string) => Promise<void>;
   updateTodo: (todo: Todo) => Promise<void>;
@@ -30,6 +32,9 @@ export const useTodoStore = create<TodoState>((set, get) => ({
   filteredTodos: loadTodos(),
   isLoading: false,
   error: null,
+  connectionMode: 'loading', // 'mongoDB', 'localStorage'
+  
+  setConnectionMode: (mode) => set({ connectionMode: mode }),
   
   // Load todos from API
   loadTodos: async () => {

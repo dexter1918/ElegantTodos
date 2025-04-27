@@ -43,14 +43,24 @@ todoRouter.get('/search/:term', async (req: Request, res: Response) => {
     
     const searchTerm = req.params.term;
     
-    // Use text index for search
-    const todos = await Todo.find(
-      { $text: { $search: searchTerm } },
-      { score: { $meta: "textScore" } }
-    )
-    .sort({ score: { $meta: "textScore" } });
-    
-    res.json(todos);
+    try {
+      // We need to do this differently with our custom Todo implementation
+      const todos = await Todo.find();
+      
+      // Implement simple search logic in-memory
+      const filteredTodos = todos.filter((todo: any) => {
+        const text = todo.text || '';
+        const notes = todo.notes || '';
+        return text.toLowerCase().includes(searchTerm.toLowerCase()) || 
+               notes.toLowerCase().includes(searchTerm.toLowerCase());
+      });
+      
+      res.json(filteredTodos);
+    } catch (searchError) {
+      console.error('Error processing search:', searchError);
+      // Fallback to empty results
+      res.json([]);
+    }
   } catch (error) {
     console.error('Error searching todos:', error);
     log(`Error searching todos: ${error}`, 'api');
