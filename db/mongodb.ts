@@ -4,7 +4,42 @@ import { log } from '../server/vite';
 
 // MongoDB connection URL from environment variable
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/todo_app';
-const DB_NAME = "ElegantTodosDB"; // Your database name
+
+// Extract database name from connection string or use default
+const extractDatabaseName = (): string => {
+  try {
+    if (MONGODB_URI.includes('mongodb+srv://') || MONGODB_URI.includes('mongodb://')) {
+      // Try to extract database name from the connection string
+      const dbNameMatch = MONGODB_URI.match(/\/([^/?]+)(\?|$)/);
+      if (dbNameMatch && dbNameMatch[1]) {
+        return dbNameMatch[1];
+      }
+    }
+    return "ElegantTodosDB"; // Default database name
+  } catch (error) {
+    console.error("Error extracting database name:", error);
+    return "ElegantTodosDB";
+  }
+};
+
+const DB_NAME = extractDatabaseName();
+
+// Mask sensitive information in logs
+const getMaskedUri = (uri: string): string => {
+  try {
+    // Replace username and password with asterisks in connection string
+    if (uri.includes('@')) {
+      const beforeAt = uri.split('@')[0];
+      const afterAt = uri.split('@')[1];
+      const protocol = beforeAt.split('://')[0];
+      return `${protocol}://*****:*****@${afterAt}`;
+    }
+    // If no credentials in URI, just return the first part
+    return `${uri.split('/')[0]}//*****`;
+  } catch (error) {
+    return "mongodb://*****"; // Safe fallback
+  }
+};
 
 // Connect to MongoDB with timeout
 export const connectToMongoDB = async (): Promise<void> => {
@@ -20,11 +55,12 @@ export const connectToMongoDB = async (): Promise<void> => {
     
     try {
       console.log('Attempting to connect to MongoDB...');
-      console.log(`MongoDB URI: ${MONGODB_URI.slice(0, 15)}...`); // Only show the beginning for security
+      // Only log masked URI with credentials hidden
+      console.log(`MongoDB URI: ${getMaskedUri(MONGODB_URI)}`);
 
       // Simplified connection - using just Mongoose with appropriate options
       await mongoose.connect(MONGODB_URI, {
-        serverSelectionTimeoutMS: 8000,  
+        serverSelectionTimeoutMS: 8000,
         socketTimeoutMS: 10000,
         connectTimeoutMS: 10000,
         dbName: DB_NAME,
@@ -39,7 +75,7 @@ export const connectToMongoDB = async (): Promise<void> => {
     } catch (error) {
       clearTimeout(timeout);
       console.error('Error connecting to MongoDB:', error);
-      log(`Error connecting to MongoDB: ${error}`, 'mongodb');
+      log(`Error connecting to MongoDB - using local storage fallback`, 'mongodb');
       
       // Fallback to local in-memory mode for testing/development
       log('Starting server without MongoDB connection - using local storage fallback', 'mongodb');
