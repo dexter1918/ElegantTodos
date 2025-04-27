@@ -291,15 +291,75 @@ const startServer = async () => {
     if (fs.existsSync(staticDir)) {
       app.use(express.static(staticDir));
       
+      // Create a fallback index.html if it doesn't exist
+      const indexPath = path.join(staticDir, 'index.html');
+      if (!fs.existsSync(indexPath)) {
+        console.warn('index.html not found, creating fallback');
+        const fallbackHtml = `
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>ElegantTodos</title>
+            <style>
+              body { font-family: system-ui, sans-serif; line-height: 1.5; padding: 2rem; max-width: 600px; margin: 0 auto; }
+              h1 { color: #3b82f6; }
+              p { margin: 1rem 0; }
+              code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 0.25rem; }
+            </style>
+          </head>
+          <body>
+            <h1>ElegantTodos</h1>
+            <p>The API server is running correctly, but the frontend build failed.</p>
+            <p>Check the deployment logs for more information.</p>
+            <p>API endpoints are available at <code>/api/todos</code></p>
+          </body>
+          </html>
+        `;
+        fs.writeFileSync(indexPath, fallbackHtml);
+      }
+      
       // Serve index.html for all other routes (SPA)
       app.get('*', (req, res) => {
+        if (req.path.startsWith('/api')) {
+          return res.status(404).json({ error: 'API endpoint not found' });
+        }
         res.sendFile(path.join(staticDir, 'index.html'));
       });
     } else {
       console.warn('Static directory not found:', staticDir);
-      // API-only mode fallback
+      // Create directory and fallback file
+      fs.mkdirSync(staticDir, { recursive: true });
+      const fallbackHtml = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>ElegantTodos</title>
+          <style>
+            body { font-family: system-ui, sans-serif; line-height: 1.5; padding: 2rem; max-width: 600px; margin: 0 auto; }
+            h1 { color: #3b82f6; }
+            p { margin: 1rem 0; }
+          </style>
+        </head>
+        <body>
+          <h1>ElegantTodos API</h1>
+          <p>The API server is running, but the frontend is not available.</p>
+          <p>This may be due to a build failure or missing static files.</p>
+        </body>
+        </html>
+      `;
+      fs.writeFileSync(path.join(staticDir, 'index.html'), fallbackHtml);
+      app.use(express.static(staticDir));
+      
+      // API-only mode fallback with HTML response
       app.get('*', (req, res) => {
-        res.send('ElegantTodos API server is running. Frontend not available.');
+        if (req.path.startsWith('/api')) {
+          return res.status(404).json({ error: 'API endpoint not found' });
+        }
+        res.sendFile(path.join(staticDir, 'index.html'));
       });
     }
     

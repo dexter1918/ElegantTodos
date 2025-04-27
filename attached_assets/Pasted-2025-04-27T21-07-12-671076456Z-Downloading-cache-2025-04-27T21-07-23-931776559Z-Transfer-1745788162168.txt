@@ -1,0 +1,50 @@
+2025-04-27T21:07:12.671076456Z ==> Downloading cache...
+2025-04-27T21:07:23.931776559Z ==> Transferred 151MB in 7s. Extraction took 4s.
+2025-04-27T21:07:29.679879753Z ==> Using Node.js version 22.14.0 (default)
+2025-04-27T21:07:29.704775198Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2025-04-27T21:07:29.834581294Z ==> Using Bun version 1.1.0 (default)
+2025-04-27T21:07:29.834627785Z ==> Docs on specifying a bun version: https://render.com/docs/bun-version
+2025-04-27T21:07:29.880636013Z ==> Running build command 'bash ./build.sh'...
+2025-04-27T21:07:29.885966957Z Starting build process...
+2025-04-27T21:07:29.885980268Z Installing main dependencies...
+2025-04-27T21:07:30.865389462Z 
+2025-04-27T21:07:30.865412763Z up to date, audited 462 packages in 919ms
+2025-04-27T21:07:30.865416003Z 
+2025-04-27T21:07:30.865418993Z 59 packages are looking for funding
+2025-04-27T21:07:30.865422183Z   run `npm fund` for details
+2025-04-27T21:07:30.866323733Z 
+2025-04-27T21:07:30.866336893Z found 0 vulnerabilities
+2025-04-27T21:07:30.914213521Z Building frontend...
+2025-04-27T21:07:45.433729805Z 
+2025-04-27T21:07:45.433757775Z added 35 packages, and audited 36 packages in 14s
+2025-04-27T21:07:45.433766595Z 
+2025-04-27T21:07:45.433781906Z 4 packages are looking for funding
+2025-04-27T21:07:45.433795736Z   run `npm fund` for details
+2025-04-27T21:07:45.434633794Z 
+2025-04-27T21:07:45.434645984Z found 0 vulnerabilities
+2025-04-27T21:07:45.553028046Z 
+2025-04-27T21:07:45.553048926Z > elegant-todos-client@0.0.0 build
+2025-04-27T21:07:45.553053186Z > vite build
+2025-04-27T21:07:45.553056566Z 
+2025-04-27T21:07:45.557222356Z sh: 1: vite: not found
+2025-04-27T21:07:45.564700606Z Setting up static files...
+2025-04-27T21:07:45.56769879Z cp: cannot stat 'client/dist/*': No such file or directory
+2025-04-27T21:07:45.567909875Z Build completed successfully!
+2025-04-27T21:07:48.635425453Z ==> Uploading build...
+2025-04-27T21:07:58.855221433Z ==> Uploaded in 7.2s. Compression took 3.0s
+2025-04-27T21:07:58.880662439Z ==> Build successful 🎉
+2025-04-27T21:08:00.851978137Z ==> Deploying...
+2025-04-27T21:08:22.109410395Z ==> Running 'node production-server.cjs'
+2025-04-27T21:08:25.305328484Z Attempting to connect to MongoDB...
+2025-04-27T21:08:25.305609402Z MongoDB URI: mongodb+srv://***:***@cluster0.zqtciro.mongodb.net/ElegantTodosDB
+2025-04-27T21:08:27.821409554Z Connected to MongoDB successfully!
+2025-04-27T21:08:27.83472933Z ElegantTodos server running on port 10000
+2025-04-27T21:08:28.655123501Z Error: ENOENT: no such file or directory, stat '/opt/render/project/src/server/public/index.html'
+2025-04-27T21:08:31.284700342Z GET /api/health 404 in 3ms
+2025-04-27T21:08:31.285295008Z Error: ENOENT: no such file or directory, stat '/opt/render/project/src/server/public/index.html'
+2025-04-27T21:08:41.283113926Z GET /api/health 404 in 1ms
+2025-04-27T21:08:41.283503767Z Error: ENOENT: no such file or directory, stat '/opt/render/project/src/server/public/index.html'
+2025-04-27T21:08:51.287411882Z GET /api/health 404 in 6ms
+2025-04-27T21:08:51.288243865Z Error: ENOENT: no such file or directory, stat '/opt/render/project/src/server/public/index.html'
+2025-04-27T21:09:01.283578245Z GET /api/health 404 in 2ms
+2025-04-27T21:09:01.283856543Z Error: ENOENT: no such file or directory, stat '/opt/render/project/src/server/public/index.html'
