@@ -3,7 +3,7 @@ services:
     name: eleganttodos
     runtime: node
     buildCommand: npm install
-    startCommand: node production-server.js
+    startCommand: node production-server.cjs
     envVars:
       - key: NODE_ENV
         value: production
