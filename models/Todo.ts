@@ -66,7 +66,7 @@ const todoSchema = new Schema<ITodo>(
 );
 
 // Create indexes for faster queries
-todoSchema.index({ id: 1 });
+// Note: We don't need to explicitly index 'id' as it's already defined as unique
 todoSchema.index({ userId: 1 });
 todoSchema.index({ completed: 1 });
 todoSchema.index({ text: 'text', notes: 'text' }); // Text index for search functionality

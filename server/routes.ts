@@ -1,13 +1,21 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import todoRouter from "./todoRoutes";
+import { connectToMongoDB } from "../db/mongodb";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // put application routes here
-  // prefix all routes with /api
-
-  // use storage to perform CRUD operations on the storage interface
-  // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
+  try {
+    // Connect to MongoDB when the server starts
+    console.log('Starting MongoDB connection process...');
+    await connectToMongoDB();
+    console.log('MongoDB connection process completed');
+  } catch (err) {
+    console.error('MongoDB connection error (caught in routes):', err);
+    // We'll continue anyway, using localStorage fallback
+  }
+  
+  // Register todo API routes
+  app.use('/api/todos', todoRouter);
 
   const httpServer = createServer(app);
 
