@@ -1,0 +1,65 @@
+2025-04-27T19:43:56.982452016Z ==> Cloning from https://github.com/dexter1918/ElegantTodos
+2025-04-27T19:43:57.396218535Z ==> Checking out commit 3225ea1f94d4c8bac55bb284dcd34b9caef30347 in branch replit-agent
+2025-04-27T19:43:59.072041675Z ==> Using Node.js version 22.14.0 (default)
+2025-04-27T19:43:59.097454267Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2025-04-27T19:44:01.035419399Z ==> Using Bun version 1.1.0 (default)
+2025-04-27T19:44:01.035445669Z ==> Docs on specifying a bun version: https://render.com/docs/bun-version
+2025-04-27T19:44:01.084289612Z ==> Running build command 'npm install --include=dev'...
+2025-04-27T19:44:08.596645768Z 
+2025-04-27T19:44:08.596669499Z added 541 packages, and audited 542 packages in 7s
+2025-04-27T19:44:08.596681499Z 
+2025-04-27T19:44:08.596696649Z 68 packages are looking for funding
+2025-04-27T19:44:08.59671064Z   run `npm fund` for details
+2025-04-27T19:44:08.61863632Z 
+2025-04-27T19:44:08.61865217Z 5 moderate severity vulnerabilities
+2025-04-27T19:44:08.61865601Z 
+2025-04-27T19:44:08.61866027Z To address all issues (including breaking changes), run:
+2025-04-27T19:44:08.61866405Z   npm audit fix --force
+2025-04-27T19:44:08.61866715Z 
+2025-04-27T19:44:08.618671151Z Run `npm audit` for details.
+2025-04-27T19:44:12.115041689Z ==> Uploading build...
+2025-04-27T19:44:19.905420697Z ==> Uploaded in 5.3s. Compression took 2.5s
+2025-04-27T19:44:19.939146958Z ==> Build successful 🎉
+2025-04-27T19:44:22.348892245Z ==> Deploying...
+2025-04-27T19:44:41.611751957Z ==> Running 'npx tsx server/index.ts'
+2025-04-27T19:45:04.511252006Z Starting MongoDB connection process...
+2025-04-27T19:45:04.511437121Z Starting MongoDB connection process...
+2025-04-27T19:45:04.511580355Z Attempting to connect to MongoDB...
+2025-04-27T19:45:04.511652207Z MongoDB URI: mongodb+srv://*****:*****@cluster0.zqtciro.mongodb.net/ElegantTodosDB
+2025-04-27T19:45:06.989747446Z Connected to MongoDB successfully!
+2025-04-27T19:45:07.016757643Z 7:45:06 PM [mongodb] Connected to MongoDB with database: ElegantTodosDB
+2025-04-27T19:45:07.016775643Z MongoDB connection process completed
+2025-04-27T19:45:07.016779974Z MongoDB connection process completed
+2025-04-27T19:45:07.108115852Z /opt/render/project/src/server/vite.ts:74
+2025-04-27T19:45:07.108137102Z     throw new Error(
+2025-04-27T19:45:07.108141862Z           ^
+2025-04-27T19:45:07.108145802Z 
+2025-04-27T19:45:07.108149542Z 
+2025-04-27T19:45:07.108171773Z Error: Could not find the build directory: /opt/render/project/src/server/public, make sure to build the client first
+2025-04-27T19:45:07.108179683Z     at serveStatic (/opt/render/project/src/server/vite.ts:74:11)
+2025-04-27T19:45:07.108183903Z     at <anonymous> (/opt/render/project/src/server/index.ts:67:5)
+2025-04-27T19:45:07.108188323Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-04-27T19:45:07.108191754Z 
+2025-04-27T19:45:07.108195644Z Node.js v22.14.0
+2025-04-27T19:45:09.126959209Z ==> Exited with status 1
+2025-04-27T19:45:09.143356987Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2025-04-27T19:45:14.079750542Z ==> Running 'npx tsx server/index.ts'
+2025-04-27T19:45:35.373310211Z Starting MongoDB connection process...
+2025-04-27T19:45:35.373497066Z Starting MongoDB connection process...
+2025-04-27T19:45:35.37362888Z Attempting to connect to MongoDB...
+2025-04-27T19:45:35.373702242Z MongoDB URI: mongodb+srv://*****:*****@cluster0.zqtciro.mongodb.net/ElegantTodosDB
+2025-04-27T19:45:37.761559867Z Connected to MongoDB successfully!
+2025-04-27T19:45:37.82598296Z 7:45:37 PM [mongodb] Connected to MongoDB with database: ElegantTodosDB
+2025-04-27T19:45:37.826010531Z MongoDB connection process completed
+2025-04-27T19:45:37.82601462Z MongoDB connection process completed
+2025-04-27T19:45:37.879793189Z /opt/render/project/src/server/vite.ts:74
+2025-04-27T19:45:37.8798321Z     throw new Error(
+2025-04-27T19:45:37.87983858Z           ^
+2025-04-27T19:45:37.87984268Z 
+2025-04-27T19:45:37.87984625Z 
+2025-04-27T19:45:37.87985119Z Error: Could not find the build directory: /opt/render/project/src/server/public, make sure to build the client first
+2025-04-27T19:45:37.879860281Z     at serveStatic (/opt/render/project/src/server/vite.ts:74:11)
+2025-04-27T19:45:37.879864551Z     at <anonymous> (/opt/render/project/src/server/index.ts:67:5)
+2025-04-27T19:45:37.879935063Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-04-27T19:45:37.879941233Z 
+2025-04-27T19:45:37.879945533Z Node.js v22.14.0

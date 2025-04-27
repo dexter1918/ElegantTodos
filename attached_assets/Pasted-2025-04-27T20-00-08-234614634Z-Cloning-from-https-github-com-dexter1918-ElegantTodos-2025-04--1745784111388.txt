@@ -1,0 +1,40 @@
+2025-04-27T20:00:08.234614634Z ==> Cloning from https://github.com/dexter1918/ElegantTodos
+2025-04-27T20:00:08.674663396Z ==> Checking out commit 3225ea1f94d4c8bac55bb284dcd34b9caef30347 in branch replit-agent
+2025-04-27T20:00:10.296420606Z ==> Using Node.js version 22.14.0 (default)
+2025-04-27T20:00:10.321919621Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2025-04-27T20:00:12.129806648Z ==> Using Bun version 1.1.0 (default)
+2025-04-27T20:00:12.129824839Z ==> Docs on specifying a bun version: https://render.com/docs/bun-version
+2025-04-27T20:00:12.178312345Z ==> Running build command 'npm install'...
+2025-04-27T20:00:18.621710085Z 
+2025-04-27T20:00:18.621738775Z added 461 packages, and audited 462 packages in 6s
+2025-04-27T20:00:18.621751355Z 
+2025-04-27T20:00:18.621756686Z 59 packages are looking for funding
+2025-04-27T20:00:18.621761266Z   run `npm fund` for details
+2025-04-27T20:00:18.622737056Z 
+2025-04-27T20:00:18.622752167Z found 0 vulnerabilities
+2025-04-27T20:00:22.424466034Z ==> Uploading build...
+2025-04-27T20:00:29.914632989Z ==> Uploaded in 5.1s. Compression took 2.4s
+2025-04-27T20:00:29.942666608Z ==> Build successful 🎉
+2025-04-27T20:00:31.721414008Z ==> Deploying...
+2025-04-27T20:00:54.798569214Z ==> Running 'NODE_ENV=production PORT=10000 npx tsx server/index.ts'
+2025-04-27T20:01:14.788317202Z 
+2025-04-27T20:01:14.788348043Z node:internal/modules/run_main:122
+2025-04-27T20:01:14.788353213Z     triggerUncaughtException(
+2025-04-27T20:01:14.788357333Z     ^
+2025-04-27T20:01:14.788362103Z Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'vite' imported from /opt/render/project/src/server/vite.ts
+2025-04-27T20:01:14.788367763Z     at Object.getPackageJSONURL (node:internal/modules/package_json_reader:268:9)
+2025-04-27T20:01:14.788372593Z     at packageResolve (node:internal/modules/esm/resolve:768:81)
+2025-04-27T20:01:14.788376283Z     at moduleResolve (node:internal/modules/esm/resolve:854:18)
+2025-04-27T20:01:14.788380383Z     at defaultResolve (node:internal/modules/esm/resolve:984:11)
+2025-04-27T20:01:14.788384333Z     at nextResolve (node:internal/modules/esm/hooks:748:28)
+2025-04-27T20:01:14.788389194Z     at resolveBase (file:///opt/render/.cache/_npx/fd45a72a545557e9/node_modules/tsx/dist/esm/index.mjs?1745784072988:2:3212)
+2025-04-27T20:01:14.788393334Z     at resolveDirectory (file:///opt/render/.cache/_npx/fd45a72a545557e9/node_modules/tsx/dist/esm/index.mjs?1745784072988:2:3584)
+2025-04-27T20:01:14.788397144Z     at resolveTsPaths (file:///opt/render/.cache/_npx/fd45a72a545557e9/node_modules/tsx/dist/esm/index.mjs?1745784072988:2:4073)
+2025-04-27T20:01:14.788400814Z     at async resolve (file:///opt/render/.cache/_npx/fd45a72a545557e9/node_modules/tsx/dist/esm/index.mjs?1745784072988:2:4441)
+2025-04-27T20:01:14.788405184Z     at async nextResolve (node:internal/modules/esm/hooks:748:22) {
+2025-04-27T20:01:14.788409014Z   code: 'ERR_MODULE_NOT_FOUND'
+2025-04-27T20:01:14.788413104Z }
+2025-04-27T20:01:14.788416944Z 
+2025-04-27T20:01:14.788420574Z Node.js v22.14.0
+2025-04-27T20:01:23.67943813Z ==> Exited with status 1
+2025-04-27T20:01:23.695678838Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

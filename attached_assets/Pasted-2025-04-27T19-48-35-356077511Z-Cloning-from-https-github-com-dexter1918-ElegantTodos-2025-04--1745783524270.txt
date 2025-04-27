@@ -1,0 +1,33 @@
+2025-04-27T19:48:35.356077511Z ==> Cloning from https://github.com/dexter1918/ElegantTodos
+2025-04-27T19:48:35.796447469Z ==> Checking out commit 3225ea1f94d4c8bac55bb284dcd34b9caef30347 in branch replit-agent
+2025-04-27T19:48:37.431830351Z ==> Using Node.js version 22.14.0 (default)
+2025-04-27T19:48:37.457375864Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2025-04-27T19:48:39.344801676Z ==> Using Bun version 1.1.0 (default)
+2025-04-27T19:48:39.344819666Z ==> Docs on specifying a bun version: https://render.com/docs/bun-version
+2025-04-27T19:48:39.39508943Z ==> Running build command 'npm install --include=dev && cd client && npm install && npm run build && cd .. && mkdir -p server/public && cp -r client/dist/* server/public/'...
+2025-04-27T19:48:50.482277356Z 
+2025-04-27T19:48:50.482303336Z added 541 packages, and audited 542 packages in 11s
+2025-04-27T19:48:50.482308366Z 
+2025-04-27T19:48:50.482318616Z 68 packages are looking for funding
+2025-04-27T19:48:50.482323037Z   run `npm fund` for details
+2025-04-27T19:48:50.501492867Z 
+2025-04-27T19:48:50.501508287Z 5 moderate severity vulnerabilities
+2025-04-27T19:48:50.501511777Z 
+2025-04-27T19:48:50.501516137Z To address all issues (including breaking changes), run:
+2025-04-27T19:48:50.501520067Z   npm audit fix --force
+2025-04-27T19:48:50.501523267Z 
+2025-04-27T19:48:50.501527037Z Run `npm audit` for details.
+2025-04-27T19:48:51.55204515Z 
+2025-04-27T19:48:51.552073111Z up to date, audited 462 packages in 930ms
+2025-04-27T19:48:51.552077031Z 
+2025-04-27T19:48:51.552104971Z 59 packages are looking for funding
+2025-04-27T19:48:51.552117062Z   run `npm fund` for details
+2025-04-27T19:48:51.553084847Z 
+2025-04-27T19:48:51.553096227Z found 0 vulnerabilities
+2025-04-27T19:48:51.665949304Z 
+2025-04-27T19:48:51.670234133Z sh: 1: vite: not found
+2025-04-27T19:48:51.6922816Z > rest-express@1.0.0 build
+2025-04-27T19:48:51.692315421Z > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-04-27T19:48:51.692320011Z 
+2025-04-27T19:48:51.742598965Z ==> Build failed 😞
+2025-04-27T19:48:51.742616705Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
