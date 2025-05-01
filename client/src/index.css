@@ -35,6 +35,8 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 214 100% 50%;
+    --elegant-red: 354 70% 54%; /* Elegant red color */
+    --elegant-red-hover: 354 70% 44%; /* Darker shade for hover */
     --radius: 0.5rem;
   }
 
@@ -58,6 +60,8 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 214 100% 50%;
+    --elegant-red: 354 70% 60%; /* Slightly brighter for dark mode */
+    --elegant-red-hover: 354 70% 50%; /* Darker shade for hover in dark mode */
   }
 }
 
